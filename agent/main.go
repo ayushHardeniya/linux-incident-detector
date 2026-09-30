@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"time"
-	"os"
 
 	"github.com/fsnotify/fsnotify"
 )
@@ -28,10 +27,6 @@ func main() {
 	if err := watcher.Add(watchedFile); err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Fprintln(os.Stderr, "=== Linux Incident Detection Agent ===")
-	fmt.Fprintln(os.Stderr, "Watching:", watchedFile)
-	fmt.Fprintln(os.Stderr, "Waiting for filesystem events...")
 
 	for {
 		select {

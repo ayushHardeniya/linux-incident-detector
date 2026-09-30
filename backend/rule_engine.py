@@ -67,8 +67,12 @@ def save_finding(file_path, event_type, timestamp, snapshot):
         json.dump(findings[-50:], f, indent=2)
 
 def main():
-    print("=== Linux Incident Detector ===")
-    print("Watching:", WATCHED_FILE)
+    print("=== Linux Incident Detection System ===")
+    print(f"Watching: {WATCHED_FILE}")
+    print("Agent: CONNECTED")
+    print("Detector: ONLINE")
+    print("Status: Waiting for filesystem events...")
+    print()
 
     for line in iter(input, ""):
         line = line.strip()

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Linux Incident Findings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #1F4E78;
+            color: white;
+        }
+
+        .high {
+            background: #e74c3c;
+            color: white;
+            font-weight: bold;
+        }
+
+        .medium {
+            background: #f39c12;
+            color: white;
+            font-weight: bold;
+        }
+
+        .low {
+            background: #95a5a6;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Linux Incident Findings</h2>
+
+    <table id="findings">
+        <tr>
+            <th>Time</th>
+            <th>Finding</th>
+            <th>Severity</th>
+        </tr>
+    </table>
+
+    <script>
+        async function loadFindings() {
+            const response = await fetch(
+                'runtime/findings.json?t=' + Date.now()
+            );
+
+            const findings = await response.json();
+            const table = document.getElementById('findings');
+
+            table.innerHTML = `
+                <tr>
+                    <th>Time</th>
+                    <th>Finding</th>
+                    <th>Severity</th>
+                </tr>
+            `;
+
+            findings.slice().reverse().forEach(finding => {
+                const row = table.insertRow();
+
+                row.insertCell().textContent = finding.time;
+                row.insertCell().textContent = finding.summary;
+
+                const severityCell = row.insertCell();
+                severityCell.textContent = finding.severity;
+                severityCell.className =
+                    finding.severity.toLowerCase();
+            });
+        }
+
+        loadFindings();
+        setInterval(loadFindings, 3000);
+    </script>
+</body>
+</html>

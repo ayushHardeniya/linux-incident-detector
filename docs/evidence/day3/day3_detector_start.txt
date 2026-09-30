@@ -1,0 +1,7 @@
+===== Linux Incident Detector =====
+
+Watching: /etc/ssh/sshd_config
+INCIDENT DETECTED
+File: /etc/ssh/sshd_config
+Event: MODIFY
+Context snapshot: ATTACHED

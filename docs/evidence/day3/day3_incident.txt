@@ -1,0 +1,146 @@
+=== INCIDENT ===
+File: /etc/ssh/sshd_config
+Event: MODIFY
+
+=== CONTEXT SNAPSHOT ===
+Timestamp: 2026-09-30T06:07:32.987789
+
+=== PS ===
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.1  21724 12388 ?        Ss   04:00   0:01 /sbin/init
+root           2  0.0  0.0   3120  1920 ?        Sl   04:00   0:00 /init
+root           9  0.0  0.0   3120  1792 ?        Sl   04:00   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root          45  0.0  0.2  50444 15620 ?        S<s  04:00   0:01 /usr/lib/systemd/systemd-journald
+root          96  0.0  0.0  25416  6656 ?        Ss   04:00   0:02 /usr/lib/systemd/systemd-udevd
+root         107  0.0  0.0 153072  1540 ?        Ssl  04:00   0:00 snapfuse /var/lib/snapd/snaps/ruff_1696.snap /snap/ruff/1696 -o ro,nodev,allow_other,suid
+root         108  0.0  0.0 153072  1540 ?        Ssl  04:00   0:00 snapfuse /var/lib/snapd/snaps/core24_2124.snap /snap/core24/2124 -o ro,nodev,allow_other,suid
+root         113  0.0  0.1 526760 11504 ?        Ssl  04:00   0:02 snapfuse /var/lib/snapd/snaps/snapd_27738.snap /snap/snapd/27738 -o ro,nodev,allow_other,suid
+systemd+     194  0.0  0.1  21344 12544 ?        Ss   04:00   0:00 /usr/lib/systemd/systemd-resolved
+systemd+     198  0.0  0.0  91036  7680 ?        Ssl  04:00   0:00 /usr/lib/systemd/systemd-timesyncd
+root         204  0.0  0.0   4240  2560 ?        Ss   04:00   0:00 /usr/sbin/cron -f -P
+message+     205  0.0  0.0   9604  4992 ?        Ss   04:00   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         215  0.0  0.5 2590576 39160 ?       Ssl  04:00   0:02 /snap/snapd/current/usr/lib/snapd/snapd
+root         219  0.0  0.1  17968  8704 ?        Ss   04:00   0:00 /usr/lib/systemd/systemd-logind
+root         225  0.0  0.1 1756100 12416 ?       Ssl  04:00   0:00 /usr/libexec/wsl-pro-service -vv
+root         239  0.0  0.0   3164  2048 hvc0     Ss+  04:00   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud - 115200,38400,9600 vt220
+syslog       251  0.0  0.0 222516  5504 ?        Ssl  04:00   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         260  0.0  0.0   3120  1920 tty1     Ss+  04:00   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         270  0.0  0.2 107044 22400 ?        Ssl  04:00   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         441  0.0  0.0   6700  4480 pts/1    Ss   04:00   0:00 /bin/login -f
+ayushha+     489  0.0  0.1  20388 11264 ?        Ss   04:00   0:00 /usr/lib/systemd/systemd --user
+ayushha+     490  0.0  0.0  21172  3432 ?        S    04:00   0:00 (sd-pam)
+ayushha+     513  0.0  0.1  10560  9728 pts/1    S+   04:00   0:00 -bash
+root         583  0.0  0.0   3128   900 ?        Ss   04:00   0:00 /init
+root         585  0.0  0.0   3144  1292 ?        S    04:00   0:00 /init
+ayushha+     594  0.0  0.0   2804  1664 pts/0    Ss+  04:00   0:00 sh -c "$VSCODE_WSL_EXT_LOCATION/scripts/wslServer.sh" 04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1 stable code-server .vscode-server --host=127.0.0.1 --port=0 --connection-token=3810003918-1674426743-3854335726-3325397303 --use-host-proxy --without-browser-env-var --disable-websocket-compression --accept-server-license-terms --telemetry-level=all
+ayushha+     603  0.0  0.0   2804  1792 pts/0    S+   04:00   0:00 sh /mnt/c/Users/Ayush Hardeniya/.vscode/extensions/ms-vscode-remote.remote-wsl-0.104.3/scripts/wslServer.sh 04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1 stable code-server .vscode-server --host=127.0.0.1 --port=0 --connection-token=3810003918-1674426743-3854335726-3325397303 --use-host-proxy --without-browser-env-var --disable-websocket-compression --accept-server-license-terms --telemetry-level=all
+ayushha+     647  0.0  0.0   2804  1792 pts/0    S+   04:00   0:00 sh /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/bin/code-server --host=127.0.0.1 --port=0 --connection-token=3810003918-1674426743-3854335726-3325397303 --use-host-proxy --without-browser-env-var --disable-websocket-compression --accept-server-license-terms --telemetry-level=all
+ayushha+     663  0.1  1.7 1779524 139500 pts/0  Sl+  04:00   0:13 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/out/server-main.js --host=127.0.0.1 --port=0 --connection-token=3810003918-1674426743-3854335726-3325397303 --use-host-proxy --without-browser-env-var --disable-websocket-compression --accept-server-license-terms --telemetry-level=all
+root         837  0.0  0.0   3128   900 ?        Ss   04:00   0:00 /init
+root         838  0.0  0.0   3144  1164 ?        S    04:00   0:00 /init
+ayushha+     839  0.0  0.8 1415748 63300 pts/2   Ssl+ 04:00   0:03 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node -e const net = require('net'); process.stdin.pause(); const client = net.createConnection({ host: '127.0.0.1', port: 43529 }, () => { client.pipe(process.stdout); process.stdin.pipe(client); }); client.on('close', function (hadError) { console.error(hadError ? 'Remote close with error' : 'Remote close'); process.exit(hadError ? 1 : 0); }); client.on('error', function (err) { process.stderr.write(err && (err.stack || err.message) || String(err)); });
+ayushha+     846  0.1  0.9 1537908 74716 pts/0   Sl+  04:00   0:12 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/out/bootstrap-fork --type=ptyHost --logsPath /home/ayushhardeniya/.vscode-server/data/logs/20260930T035552
+root         853  0.0  0.0   3128   900 ?        Ss   04:00   0:00 /init
+root         854  0.0  0.0   3144  1292 ?        S    04:00   0:01 /init
+ayushha+     859  0.0  0.7 1412368 61220 pts/3   Ssl+ 04:00   0:03 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node -e const net = require('net'); process.stdin.pause(); const client = net.createConnection({ host: '127.0.0.1', port: 43529 }, () => { client.pipe(process.stdout); process.stdin.pipe(client); }); client.on('close', function (hadError) { console.error(hadError ? 'Remote close with error' : 'Remote close'); process.exit(hadError ? 1 : 0); }); client.on('error', function (err) { process.stderr.write(err && (err.stack || err.message) || String(err)); });
+ayushha+     902  0.0  0.7 1727080 58440 pts/0   Sl+  04:00   0:02 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/out/bootstrap-fork --type=fileWatcher
+ayushha+    1145  2.6  6.7 20120096 526616 pts/0 Sl+  04:00   3:20 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node --dns-result-order=ipv4first /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=true
+ayushha+    1151  0.1  1.8 18545180 141992 pts/0 Sl+  04:00   0:10 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/out/bootstrap-fork --type=agentHost --logsPath /home/ayushhardeniya/.vscode-server/data/logs/20260930T035552 --user-data-dir /home/ayushhardeniya/.vscode-server/data --telemetry-level all
+ayushha+    1197  0.2  0.4 2532988 37632 pts/0   Sl+  04:00   0:18 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node_modules/@github/copilot-sdk-linux-x64/prebuilds/linux-x64/copilot-runtime --headless --no-auto-update --log-level info --stdio --no-auto-login
+ayushha+    1395  0.0  0.9 1492128 73640 pts/0   Sl+  04:00   0:01 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/extensions/markdown-language-features/dist/serverWorkerMain --node-ipc --clientProcessId=1145
+ayushha+    1429  0.0  0.8 1495288 64352 pts/0   Sl+  04:00   0:00 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/extensions/json-language-features/server/dist/node/jsonServerMain --node-ipc --clientProcessId=1145
+root        1502  0.0  0.0   3128   900 ?        Ss   04:00   0:00 /init
+root        1503  0.0  0.0   3144  1292 ?        S    04:00   0:00 /init
+ayushha+    1504  0.0  0.0   2804  1664 pts/4    Ss+  04:00   0:00 /bin/sh -c cd '/home/ayushhardeniya/work/careers/linux-incident-detector' && /bin/sh
+ayushha+    1505  0.0  0.0   2804  1792 pts/4    S+   04:00   0:00 /bin/sh
+ayushha+    1515  0.0  0.6 1411092 52608 pts/4   Sl+  04:00   0:00 /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/node /home/ayushhardeniya/.vscode-remote-containers/dist/vscode-remote-containers-server-0.469.0.js
+ayushha+    1758  0.0  0.1  10696  9856 pts/5    Ss   04:00   0:00 /bin/bash --init-file /home/ayushhardeniya/.vscode-server/bin/04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
+ayushha+    1785  0.0  0.0   2808  1792 pts/4    S+   04:00   0:00 /bin/sh
+root       25730  0.0  0.0  25420  3904 ?        S    06:07   0:00 (udev-worker)
+root       25731  0.0  0.0  25420  3904 ?        S    06:07   0:00 (udev-worker)
+ayushha+   25745 83.3  0.1  16888 11776 pts/5    S+   06:07   0:00 python3 backend/rule_engine.py
+ayushha+   25746  0.0  0.0   3140  1664 pts/5    S+   06:07   0:00 tee evidence/day3_incident_console.txt
+ayushha+   25747  0.0  0.0   8424  4224 pts/5    R+   06:07   0:00 ps aux
+
+
+=== SS ===
+Netid State  Recv-Q Send-Q  Local Address:Port  Peer Address:PortProcess                               
+udp   UNCONN 0      0          127.0.0.54:53         0.0.0.0:*                                         
+udp   UNCONN 0      0       127.0.0.53%lo:53         0.0.0.0:*                                         
+udp   UNCONN 0      0      10.255.255.254:53         0.0.0.0:*                                         
+udp   UNCONN 0      0           127.0.0.1:323        0.0.0.0:*                                         
+udp   UNCONN 0      0               [::1]:323           [::]:*                                         
+tcp   LISTEN 0      4096       127.0.0.54:53         0.0.0.0:*                                         
+tcp   LISTEN 0      511         127.0.0.1:43578      0.0.0.0:*    users:(("MainThread",pid=1145,fd=46))
+tcp   LISTEN 0      511         127.0.0.1:43529      0.0.0.0:*    users:(("MainThread",pid=663,fd=22)) 
+tcp   LISTEN 0      1000   10.255.255.254:53         0.0.0.0:*                                         
+tcp   LISTEN 0      4096    127.0.0.53%lo:53         0.0.0.0:*                                         
+tcp   LISTEN 0      511         127.0.0.1:45793      0.0.0.0:*    users:(("MainThread",pid=1151,fd=30))
+
+
+=== JOURNALCTL ===
+Sep 30 06:00:43 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:01:06 Dhruva wsl-pro-service[225]: INFO Daemon: connecting to Windows Agent
+Sep 30 06:01:06 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Connecting"
+Sep 30 06:01:06 Dhruva wsl-pro-service[225]: WARNING Daemon: could not connect to Windows Agent: could not get address: could not read agent port file "/mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address": open /mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address: no such file or directory
+Sep 30 06:01:06 Dhruva wsl-pro-service[225]: INFO Reconnecting to Windows host in 60 seconds
+Sep 30 06:01:06 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Not connected: waiting to retry"
+Sep 30 06:01:17 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:01:50 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:02:09 Dhruva wsl-pro-service[225]: INFO Daemon: connecting to Windows Agent
+Sep 30 06:02:09 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Connecting"
+Sep 30 06:02:09 Dhruva wsl-pro-service[225]: WARNING Daemon: could not connect to Windows Agent: could not get address: could not read agent port file "/mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address": open /mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address: no such file or directory
+Sep 30 06:02:09 Dhruva wsl-pro-service[225]: INFO Reconnecting to Windows host in 60 seconds
+Sep 30 06:02:09 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Not connected: waiting to retry"
+Sep 30 06:02:24 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:02:57 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:03:11 Dhruva wsl-pro-service[225]: INFO Daemon: connecting to Windows Agent
+Sep 30 06:03:11 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Connecting"
+Sep 30 06:03:11 Dhruva wsl-pro-service[225]: WARNING Daemon: could not connect to Windows Agent: could not get address: could not read agent port file "/mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address": open /mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address: no such file or directory
+Sep 30 06:03:11 Dhruva wsl-pro-service[225]: INFO Reconnecting to Windows host in 60 seconds
+Sep 30 06:03:11 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Not connected: waiting to retry"
+Sep 30 06:03:31 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:04:04 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:04:14 Dhruva wsl-pro-service[225]: INFO Daemon: connecting to Windows Agent
+Sep 30 06:04:14 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Connecting"
+Sep 30 06:04:14 Dhruva wsl-pro-service[225]: WARNING Daemon: could not connect to Windows Agent: could not get address: could not read agent port file "/mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address": open /mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address: no such file or directory
+Sep 30 06:04:14 Dhruva wsl-pro-service[225]: INFO Reconnecting to Windows host in 60 seconds
+Sep 30 06:04:14 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Not connected: waiting to retry"
+Sep 30 06:04:37 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:05:04 Dhruva systemd[1]: apt-daily-upgrade.service - Daily apt upgrade and clean activities was skipped because of an unmet condition check (ConditionACPower=true).
+Sep 30 06:05:11 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:05:16 Dhruva wsl-pro-service[225]: INFO Daemon: connecting to Windows Agent
+Sep 30 06:05:16 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Connecting"
+Sep 30 06:05:16 Dhruva wsl-pro-service[225]: WARNING Daemon: could not connect to Windows Agent: could not get address: could not read agent port file "/mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address": open /mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address: no such file or directory
+Sep 30 06:05:16 Dhruva wsl-pro-service[225]: INFO Reconnecting to Windows host in 60 seconds
+Sep 30 06:05:16 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Not connected: waiting to retry"
+Sep 30 06:05:45 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:06:18 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:06:19 Dhruva wsl-pro-service[225]: INFO Daemon: connecting to Windows Agent
+Sep 30 06:06:19 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Connecting"
+Sep 30 06:06:19 Dhruva wsl-pro-service[225]: WARNING Daemon: could not connect to Windows Agent: could not get address: could not read agent port file "/mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address": open /mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address: no such file or directory
+Sep 30 06:06:19 Dhruva wsl-pro-service[225]: INFO Reconnecting to Windows host in 60 seconds
+Sep 30 06:06:19 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Not connected: waiting to retry"
+Sep 30 06:06:51 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:07:20 Dhruva wsl-pro-service[225]: INFO Daemon: connecting to Windows Agent
+Sep 30 06:07:20 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Connecting"
+Sep 30 06:07:20 Dhruva wsl-pro-service[225]: WARNING Daemon: could not connect to Windows Agent: could not get address: could not read agent port file "/mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address": open /mnt/c/Users/Ayush Hardeniya/.ubuntupro/.address: no such file or directory
+Sep 30 06:07:20 Dhruva wsl-pro-service[225]: INFO Reconnecting to Windows host in 60 seconds
+Sep 30 06:07:20 Dhruva wsl-pro-service[225]: DEBUG Updated systemd status to "Not connected: waiting to retry"
+Sep 30 06:07:25 Dhruva systemd-resolved[194]: Clock change detected. Flushing caches.
+Sep 30 06:07:25 Dhruva systemd[1]: apt-daily.service - Daily apt download activities was skipped because of an unmet condition check (ConditionACPower=true).
+
+
+=== LAST ===
+reboot   system boot  6.6.87.2-microso Wed Sep 30 03:55   still running
+reboot   system boot  6.6.87.2-microso Tue Sep 29 14:28   still running
+reboot   system boot  6.6.87.2-microso Tue Sep 29 07:46 - 10:58  (03:12)
+reboot   system boot  6.6.87.2-microso Mon Sep 28 18:49 - 19:15  (00:26)
+reboot   system boot  6.6.87.2-microso Mon Sep 28 08:27 - 11:17  (02:49)
+reboot   system boot  6.6.87.2-microso Mon Sep 28 05:30 - 07:03  (01:33)
+reboot   system boot  6.6.87.2-microso Mon Sep 28 03:43 - 07:03  (03:20)
+reboot   system boot  6.6.87.2-microso Sun Sep 27 14:48 - 15:14  (00:25)
+reboot   system boot  6.6.87.2-microso Sun Sep 27 11:53 - 14:48  (02:54)
+reboot   system boot  6.6.87.2-microso Sat Sep 26 15:41 - 15:41  (00:00)
+
+wtmp begins Tue Sep  1 13:08:13 2026

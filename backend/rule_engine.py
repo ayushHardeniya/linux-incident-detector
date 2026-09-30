@@ -41,6 +41,25 @@ def capture_context_snapshot():
 def detect_event(file_path, event):
     return file_path == WATCHED_FILE and event == "MODIFY"
 
+def save_finding(file_path, event_type, timestamp):
+    findings_path = "runtime/findings.json"
+
+    try:
+        with open(findings_path) as f:
+            findings = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        findings = []
+
+    finding = {
+        "time": timestamp,
+        "summary": f"{file_path} modified",
+        "severity": "High",
+    }
+
+    findings.append(finding)
+
+    with open(findings_path, "w") as f:
+        json.dump(findings[-50:], f, indent=2)
 
 def main():
     print("=== Linux Incident Detector ===")
@@ -74,6 +93,12 @@ def main():
                 evidence.write(f"Event: {event_type}\n")
                 evidence.write(f"Agent timestamp: {event.get('timestamp')}\n\n")
                 evidence.write(snapshot)
+
+            save_finding(
+                file_path,
+                event_type,
+                event.get("timestamp", datetime.now().isoformat()),
+            )
 
             print("Context snapshot: ATTACHED")
             print("Evidence: evidence/day3_incident.txt")

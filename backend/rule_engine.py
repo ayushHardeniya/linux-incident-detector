@@ -1,8 +1,8 @@
+import json
 import subprocess
 from datetime import datetime
 
 WATCHED_FILE = "/etc/ssh/sshd_config"
-EVENT_FEED = "evidence/event_feed.txt"
 
 
 def capture_context_snapshot():
@@ -46,32 +46,39 @@ def main():
     print("=== Linux Incident Detector ===")
     print("Watching:", WATCHED_FILE)
 
-    with open(EVENT_FEED) as feed:
-        for line in feed:
-            line = line.strip()
+    for line in iter(input, ""):
+        line = line.strip()
 
-            if not line:
-                continue
+        if not line:
+            continue
 
-            file_path, event = line.split("|", 1)
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            print("Invalid event:", line)
+            continue
 
-            print(f"Event received: {file_path} [{event}]")
+        file_path = event.get("path")
+        event_type = event.get("event")
 
-            if detect_event(file_path, event):
-                print("INCIDENT DETECTED")
+        print(f"Event received: {file_path} [{event_type}]")
 
-                snapshot = capture_context_snapshot()
+        if detect_event(file_path, event_type):
+            print("INCIDENT DETECTED")
 
-                with open("evidence/day3_incident.txt", "w") as evidence:
-                    evidence.write("=== INCIDENT ===\n")
-                    evidence.write(f"File: {file_path}\n")
-                    evidence.write(f"Event: {event}\n\n")
-                    evidence.write(snapshot)
+            snapshot = capture_context_snapshot()
 
-                print("Context snapshot: ATTACHED")
-                print("Evidence: evidence/day3_incident.txt")
-            else:
-                print("No incident")
+            with open("evidence/day3_incident.txt", "w") as evidence:
+                evidence.write("=== INCIDENT ===\n")
+                evidence.write(f"File: {file_path}\n")
+                evidence.write(f"Event: {event_type}\n")
+                evidence.write(f"Agent timestamp: {event.get('timestamp')}\n\n")
+                evidence.write(snapshot)
+
+            print("Context snapshot: ATTACHED")
+            print("Evidence: evidence/day3_incident.txt")
+        else:
+            print("No incident")
 
 
 if __name__ == "__main__":

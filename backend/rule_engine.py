@@ -1,5 +1,6 @@
 import json
 import subprocess
+import os
 from datetime import datetime
 
 WATCHED_FILE = "/etc/ssh/sshd_config"
@@ -42,6 +43,7 @@ def detect_event(file_path, event):
     return file_path == WATCHED_FILE and event == "MODIFY"
 
 def save_finding(file_path, event_type, timestamp):
+    os.makedirs("runtime", exist_ok=True)
     findings_path = "runtime/findings.json"
 
     try:

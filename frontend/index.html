@@ -93,7 +93,7 @@
 
         async function loadFindings() {
             const response = await fetch(
-                'runtime/findings.json?t=' + Date.now()
+                '../runtime/findings.json?t=' + Date.now()
             );
 
             findings = await response.json();

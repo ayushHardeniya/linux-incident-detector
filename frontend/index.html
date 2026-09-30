@@ -1,78 +1,231 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Linux Incident Findings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Linux Incident Detector</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
+        * {
+            box-sizing: border-box;
         }
 
-        h2 {
-            margin-bottom: 20px;
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #1f2933;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #667085;
+            margin-bottom: 30px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
+        th,
+        td {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 12px;
             text-align: left;
         }
 
         th {
-            background: #1F4E78;
+            background: #1f4e78;
             color: white;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .severity {
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 6px 10px;
+            display: inline-block;
         }
 
         .high {
             background: #e74c3c;
             color: white;
-            font-weight: bold;
         }
 
         .medium {
             background: #f39c12;
             color: white;
-            font-weight: bold;
         }
 
         .low {
             background: #95a5a6;
             color: white;
-            font-weight: bold;
         }
 
         button {
-            padding: 6px 10px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            padding: 7px 12px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
+        button:hover {
+            background: #f1f5f9;
+        }
+
+        /* Incident details */
+
         #context {
-            margin-top: 25px;
+            margin-top: 30px;
             display: none;
         }
 
-        #snapshot {
-            background: #111;
-            color: #eee;
-            padding: 15px;
+        .incident-header {
+            background: white;
+            padding: 20px;
+            border-left: 5px solid #e74c3c;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .incident-header h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .incident-meta {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .meta-item {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        .meta-label {
+            display: block;
+            font-size: 12px;
+            color: #667085;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .meta-value {
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        .snapshot-title {
+            margin-bottom: 15px;
+        }
+
+        /* Collapsible sections */
+
+        .snapshot-section {
+            background: white;
+            margin-bottom: 12px;
+            border: 1px solid #dfe3e8;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: #f8fafc;
+            border: none;
+            border-radius: 0;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .section-header:hover {
+            background: #eef2f6;
+        }
+
+        .section-icon {
+            font-size: 13px;
+            color: #667085;
+        }
+
+        .section-content {
+            display: none;
+            padding: 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .section-content.open {
+            display: block;
+        }
+
+        pre {
+            margin: 0;
+            padding: 16px;
+            background: #111827;
+            color: #e5e7eb;
+            font-family: "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.5;
             white-space: pre-wrap;
             overflow-x: auto;
-            max-height: 500px;
+            max-height: 450px;
             overflow-y: auto;
+        }
+
+        .empty {
+            padding: 20px;
+            color: #667085;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                padding: 20px;
+            }
+
+            .incident-meta {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            table {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Linux Incident Findings</h2>
+<div class="container">
+
+    <h1>Linux Incident Detection & Monitoring</h1>
+
+    <div class="subtitle">
+        Real-time detection and investigation of Linux system incidents
+    </div>
 
     <table id="findings">
         <tr>
@@ -84,14 +237,100 @@
     </table>
 
     <div id="context">
-        <h3>Incident Context Snapshot</h3>
-        <pre id="snapshot"></pre>
+
+        <div class="incident-header">
+
+            <h2>Incident Details</h2>
+
+            <div class="incident-meta">
+
+                <div class="meta-item">
+                    <span class="meta-label">File</span>
+                    <span class="meta-value" id="detail-file"></span>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">Event</span>
+                    <span class="meta-value" id="detail-event"></span>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">Severity</span>
+                    <span class="meta-value" id="detail-severity"></span>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">Detected</span>
+                    <span class="meta-value" id="detail-time"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <h2 class="snapshot-title">Incident Context Snapshot</h2>
+
+        <div id="snapshot-sections">
+
+            <div class="snapshot-section">
+                <button class="section-header" onclick="toggleSection('processes', this)">
+                    <span>Processes</span>
+                    <span class="section-icon">+</span>
+                </button>
+
+                <div id="processes" class="section-content">
+                    <pre id="processes-content"></pre>
+                </div>
+            </div>
+
+            <div class="snapshot-section">
+                <button class="section-header" onclick="toggleSection('network', this)">
+                    <span>Network Connections</span>
+                    <span class="section-icon">+</span>
+                </button>
+
+                <div id="network" class="section-content">
+                    <pre id="network-content"></pre>
+                </div>
+            </div>
+
+            <div class="snapshot-section">
+                <button class="section-header" onclick="toggleSection('journal', this)">
+                    <span>Journal Logs</span>
+                    <span class="section-icon">+</span>
+                </button>
+
+                <div id="journal" class="section-content">
+                    <pre id="journal-content"></pre>
+                </div>
+            </div>
+
+            <div class="snapshot-section">
+                <button class="section-header" onclick="toggleSection('login', this)">
+                    <span>Login History</span>
+                    <span class="section-icon">+</span>
+                </button>
+
+                <div id="login" class="section-content">
+                    <pre id="login-content"></pre>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
-    <script>
-        let findings = [];
+</div>
 
-        async function loadFindings() {
+
+<script>
+
+    let findings = [];
+
+    async function loadFindings() {
+
+        try {
+
             const response = await fetch(
                 '../runtime/findings.json?t=' + Date.now()
             );
@@ -109,18 +348,25 @@
                 </tr>
             `;
 
-            findings.slice().reverse().forEach((finding, index) => {
+            findings.slice().reverse().forEach((finding) => {
+
                 const row = table.insertRow();
 
                 row.insertCell().textContent = finding.time;
                 row.insertCell().textContent = finding.summary;
 
                 const severityCell = row.insertCell();
-                severityCell.textContent = finding.severity;
-                severityCell.className =
-                    finding.severity.toLowerCase();
+
+                const severity = document.createElement('span');
+
+                severity.textContent = finding.severity;
+                severity.className =
+                    'severity ' + finding.severity.toLowerCase();
+
+                severityCell.appendChild(severity);
 
                 const contextCell = row.insertCell();
+
                 const button = document.createElement('button');
 
                 button.textContent = 'View Context';
@@ -131,22 +377,143 @@
 
                 contextCell.appendChild(button);
             });
+
+        } catch (error) {
+
+            console.error('Unable to load findings:', error);
+
+        }
+    }
+
+
+    function showContext(finding) {
+
+        document.getElementById('context').style.display = 'block';
+
+        document.getElementById('detail-file').textContent =
+            finding.file || 'Unavailable';
+
+        document.getElementById('detail-event').textContent =
+            finding.event || 'Unavailable';
+
+        document.getElementById('detail-severity').textContent =
+            finding.severity || 'Unavailable';
+
+        document.getElementById('detail-time').textContent =
+            finding.time || 'Unavailable';
+
+
+        const sections = parseSnapshot(finding.snapshot || '');
+
+        document.getElementById('processes-content').textContent =
+            sections.PS || 'No process information available.';
+
+        document.getElementById('network-content').textContent =
+            sections.SS || 'No network information available.';
+
+        document.getElementById('journal-content').textContent =
+            sections.JOURNALCTL || 'No journal logs available.';
+
+        document.getElementById('login-content').textContent =
+            sections.LAST || 'No login history available.';
+
+
+        // Open the first section automatically.
+        openSection('processes');
+
+        // Scroll to incident details.
+        document.getElementById('context').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
+
+    function parseSnapshot(snapshot) {
+
+        const sections = {
+            PS: '',
+            SS: '',
+            JOURNALCTL: '',
+            LAST: ''
+        };
+
+        const markers = [
+            ['PS', '=== PS ==='],
+            ['SS', '=== SS ==='],
+            ['JOURNALCTL', '=== JOURNALCTL ==='],
+            ['LAST', '=== LAST ===']
+        ];
+
+        for (let i = 0; i < markers.length; i++) {
+
+            const name = markers[i][0];
+            const marker = markers[i][1];
+
+            const start = snapshot.indexOf(marker);
+
+            if (start === -1) {
+                continue;
+            }
+
+            const contentStart = start + marker.length;
+
+            let contentEnd = snapshot.length;
+
+            for (let j = i + 1; j < markers.length; j++) {
+
+                const nextMarker = snapshot.indexOf(
+                    markers[j][1],
+                    contentStart
+                );
+
+                if (nextMarker !== -1) {
+                    contentEnd = nextMarker;
+                    break;
+                }
+            }
+
+            sections[name] =
+                snapshot
+                    .substring(contentStart, contentEnd)
+                    .trim();
         }
 
-        function showContext(finding) {
-            document.getElementById('context').style.display = 'block';
+        return sections;
+    }
 
-            document.getElementById('snapshot').textContent =
-                `File: ${finding.file}
-Event: ${finding.event}
-Time: ${finding.time}
 
-${finding.snapshot}`;
-        }
+    function toggleSection(id, button) {
 
-        loadFindings();
-        setInterval(loadFindings, 3000);
-    </script>
+        const section = document.getElementById(id);
+
+        const isOpen =
+            section.classList.contains('open');
+
+        section.classList.toggle('open');
+
+        button.querySelector('.section-icon').textContent =
+            isOpen ? '+' : '−';
+    }
+
+
+    function openSection(id) {
+
+        const section = document.getElementById(id);
+
+        section.classList.add('open');
+
+        const button =
+            section.previousElementSibling;
+
+        button.querySelector('.section-icon').textContent = '−';
+    }
+
+
+    loadFindings();
+
+    setInterval(loadFindings, 3000);
+
+</script>
 
 </body>
 </html>

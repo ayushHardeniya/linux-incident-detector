@@ -42,7 +42,7 @@ def capture_context_snapshot():
 def detect_event(file_path, event):
     return file_path == WATCHED_FILE and event == "MODIFY"
 
-def save_finding(file_path, event_type, timestamp):
+def save_finding(file_path, event_type, timestamp, snapshot):
     os.makedirs("runtime", exist_ok=True)
     findings_path = "runtime/findings.json"
 
@@ -56,6 +56,9 @@ def save_finding(file_path, event_type, timestamp):
         "time": timestamp,
         "summary": f"{file_path} modified",
         "severity": "High",
+        "file": file_path,
+        "event": event_type,
+        "snapshot": snapshot,
     }
 
     findings.append(finding)
@@ -100,6 +103,7 @@ def main():
                 file_path,
                 event_type,
                 event.get("timestamp", datetime.now().isoformat()),
+                snapshot,
             )
 
             print("Context snapshot: ATTACHED")

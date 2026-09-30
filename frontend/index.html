@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Linux Incident Findings</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,10 +47,31 @@
             color: white;
             font-weight: bold;
         }
+
+        button {
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        #context {
+            margin-top: 25px;
+            display: none;
+        }
+
+        #snapshot {
+            background: #111;
+            color: #eee;
+            padding: 15px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            max-height: 500px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 
 <body>
+
     <h2>Linux Incident Findings</h2>
 
     <table id="findings">
@@ -57,16 +79,25 @@
             <th>Time</th>
             <th>Finding</th>
             <th>Severity</th>
+            <th>Context</th>
         </tr>
     </table>
 
+    <div id="context">
+        <h3>Incident Context Snapshot</h3>
+        <pre id="snapshot"></pre>
+    </div>
+
     <script>
+        let findings = [];
+
         async function loadFindings() {
             const response = await fetch(
-                '../runtime/findings.json?t=' + Date.now()
+                'runtime/findings.json?t=' + Date.now()
             );
 
-            const findings = await response.json();
+            findings = await response.json();
+
             const table = document.getElementById('findings');
 
             table.innerHTML = `
@@ -74,10 +105,11 @@
                     <th>Time</th>
                     <th>Finding</th>
                     <th>Severity</th>
+                    <th>Context</th>
                 </tr>
             `;
 
-            findings.slice().reverse().forEach(finding => {
+            findings.slice().reverse().forEach((finding, index) => {
                 const row = table.insertRow();
 
                 row.insertCell().textContent = finding.time;
@@ -87,11 +119,34 @@
                 severityCell.textContent = finding.severity;
                 severityCell.className =
                     finding.severity.toLowerCase();
+
+                const contextCell = row.insertCell();
+                const button = document.createElement('button');
+
+                button.textContent = 'View Context';
+
+                button.onclick = () => {
+                    showContext(finding);
+                };
+
+                contextCell.appendChild(button);
             });
+        }
+
+        function showContext(finding) {
+            document.getElementById('context').style.display = 'block';
+
+            document.getElementById('snapshot').textContent =
+                `File: ${finding.file}
+Event: ${finding.event}
+Time: ${finding.time}
+
+${finding.snapshot}`;
         }
 
         loadFindings();
         setInterval(loadFindings, 3000);
     </script>
+
 </body>
 </html>

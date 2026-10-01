@@ -1,13 +1,24 @@
-<center>
-<img src="docs/logo.png" height="160px">
+<p align="center">
+  <img src="docs/logo.png" height="160" alt="Linux Incident Detection & Monitoring">
+</p>
 
-<h1>Linux Incident Detection & Monitoring</h1>
+<h1 align="center">Linux Incident Detection & Monitoring</h1>
 
-A lightweight Linux server monitoring system that detects suspicious system changes and captures the surrounding system state as an **Incident Context Snapshot** for investigation.
+<p align="center">
+  Detect changes. Capture context. Investigate incidents.
+</p>
 
-> **P_206: Incident Detection on Linux Server**
+<p align="center">
+  <strong>P_206 · Incident Detection on Linux Server</strong>
+</p>
 
-</center>
+<p align="center">
+  <img src="https://img.shields.io/badge/Go-1.22.2-00ADD8?logo=go&logoColor=white">
+  <img src="https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/Linux-Ubuntu%2024.04-E95420?logo=ubuntu&logoColor=white">
+  <img src="https://img.shields.io/badge/Status-Prototype-2ea44f">
+</p>
+
 ---
 
 ## Problem Statement

@@ -1,9 +1,13 @@
-# Linux Incident Detection & Monitoring
+<center>
+<img src="docs/logo.png" height="160px">
+
+<h1>Linux Incident Detection & Monitoring</h1>
 
 A lightweight Linux server monitoring system that detects suspicious system changes and captures the surrounding system state as an **Incident Context Snapshot** for investigation.
 
 > **P_206: Incident Detection on Linux Server**
 
+</center>
 ---
 
 ## Problem Statement
